@@ -8,6 +8,7 @@ public class SequenceProcessor {
 	 */
 	public Drive drive;
 	public PositionArm positionArm;
+	public Intake intake;
 
 	public SequenceProcessor() {
 		/**
@@ -15,12 +16,15 @@ public class SequenceProcessor {
 		 */
 		drive = new Drive(DrivePhase.NEUTRAL, DrivePhase.DRIVE);
 		positionArm = new PositionArm(PositionArmPhase.NEUTRAL, PositionArmPhase.NEUTRAL);
+		intake = new Intake(IntakePhase.NEUTRAL, IntakePhase.NEUTRAL);
 	}
 
 	public void process() {
 		drive.start(Robot.drivetrain);
-		positionArm.start();
+		// positionArm.start();
+		intake.start();
 		drive.process();
-		positionArm.process();
+		// positionArm.process();
+		intake.process();
 	}
 }

@@ -32,7 +32,7 @@ import java.util.Arrays;
  */
 public class Robot extends TimedRobot {
 	public static Drivetrain drivetrain;
-	public static Arm arm;
+	// public static Arm arm;
 	public static Intake intake;
 	public static SequenceProcessor sequenceProcessor;
 	public static RobotContainer robotContainer;
@@ -46,15 +46,16 @@ public class Robot extends TimedRobot {
 	private int loopCnt = 0;
 	private int loopPeriod = 0;
 	private int logCounter = 0;
+	private long prevLoopTime = 0;
 
 	@Override
 	public void robotInit() {
 		robotContainer = new RobotContainer();
 		drivetrain = new Drivetrain();
-		arm = new Arm();
+		// arm = new Arm();
 		intake = new Intake();
 		sequenceProcessor = new SequenceProcessor();
-		Arrays.asList(Path.values()).stream().forEach(path -> path.loadPath());
+		// Arrays.asList(Path.values()).stream().forEach(path -> path.loadPath());
 		SmartDashboard.putNumber("Auton Time Delay(ms)", 0.0);
 		sendableChooser.setDefaultOption("NO AUTON", Auton.NO_OP);
 		SmartDashboard.putData(sendableChooser);
@@ -68,25 +69,23 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledInit() {
 		drivetrain.forceRelease();
-		arm.forceRelease();
+		prevLoopTime = 0;
+		// arm.forceRelease();
 		intake.forceRelease();
 	}
 
 	@Override
 	public void disabledPeriodic() {
-		long prevLoopTime = 0;
-		while (this.isDisabled()) {
-			log();
-			long currentTime = System.currentTimeMillis();
-			if (currentTime - prevLoopTime >= designatedLoopPeriod) {
-				loopPeriod = (int) (currentTime - prevLoopTime);
-				prevLoopTime = currentTime;
-				loopCnt++;
-				drivetrain.neutral();
-				drivetrain.process();
-			}
-			Timer.delay(0.001);
+		log();
+		long currentTime = System.currentTimeMillis();
+		if (currentTime - prevLoopTime >= designatedLoopPeriod) {
+			loopPeriod = (int) (currentTime - prevLoopTime);
+			prevLoopTime = currentTime;
+			loopCnt++;
+			drivetrain.neutral();
+			drivetrain.process();
 		}
+		Timer.delay(0.001);
 	}
 
 	@Override
@@ -94,59 +93,55 @@ public class Robot extends TimedRobot {
 		chosenAuton = sendableChooser.getSelected().getAuton();
 		chosenAuton.start();
 		autonStartTime = System.currentTimeMillis();
+		prevLoopTime = 0;
 	}
 
 	@Override
 	public void autonomousPeriodic() {
 		isAutonomous = this.isAutonomous();
-		long prevLoopTime = 0;
-		while (this.isAutonomous() && this.isEnabled()) {
-			log();
-			long currentTime = System.currentTimeMillis();
-			if (currentTime - prevLoopTime >= designatedLoopPeriod) {
-				loopPeriod = (int) (currentTime - prevLoopTime);
-				prevLoopTime = currentTime;
-				loopCnt++;
-				if (currentTime - autonStartTime > SmartDashboard.getNumber("Auton Time Delay(ms)", 0.0)) {
-					chosenAuton.process();
-				}
-				// run processes
-				/** Run subsystem process methods here */
-				drivetrain.process();
-				arm.process();
-				intake.process();
+		log();
+		long currentTime = System.currentTimeMillis();
+		if (currentTime - prevLoopTime >= designatedLoopPeriod) {
+			loopPeriod = (int) (currentTime - prevLoopTime);
+			prevLoopTime = currentTime;
+			loopCnt++;
+			if (currentTime - autonStartTime > SmartDashboard.getNumber("Auton Time Delay(ms)", 0.0)) {
+				chosenAuton.process();
 			}
-			Timer.delay(0.001);
+			// run processes
+			/** Run subsystem process methods here */
+			drivetrain.process();
+			// arm.process();
+			intake.process();
 		}
+		Timer.delay(0.001);
 	}
 
 	@Override
 	public void teleopInit() {
 		drivetrain.forceRelease();
-		arm.forceRelease();
+		// arm.forceRelease();
 		intake.forceRelease();
+		prevLoopTime = 0;
 	}
 
 	@Override
 	public void teleopPeriodic() {
 		isAutonomous = this.isAutonomous();
-		long prevLoopTime = 0;
-		while (this.isTeleop() && this.isEnabled()) {
-			log();
-			long currentTime = System.currentTimeMillis();
-			if (currentTime - prevLoopTime >= designatedLoopPeriod) {
-				loopPeriod = (int) (currentTime - prevLoopTime);
-				prevLoopTime = currentTime;
-				loopCnt++;
-				sequenceProcessor.process();
-				// run processes
-				/** Run subsystem process methods here */
-				drivetrain.process();
-				arm.process();
-				intake.process();
-			}
-			Timer.delay(0.001);
+		log();
+		long currentTime = System.currentTimeMillis();
+		if (currentTime - prevLoopTime >= designatedLoopPeriod) {
+			loopPeriod = (int) (currentTime - prevLoopTime);
+			prevLoopTime = currentTime;
+			loopCnt++;
+			sequenceProcessor.process();
+			// run processes
+			/** Run subsystem process methods here */
+			drivetrain.process();
+			// arm.process();
+			intake.process();
 		}
+		Timer.delay(0.001);
 	}
 
 	@Override

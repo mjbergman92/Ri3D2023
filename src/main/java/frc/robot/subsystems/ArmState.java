@@ -42,6 +42,6 @@ public enum ArmState implements ISubsystemState<Arm> {
 
     @Override
     public Arm getSubsystem() {
-        return Robot.arm;
+        return null;// Robot.arm;
     }
 }

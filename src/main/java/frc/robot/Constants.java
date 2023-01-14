@@ -34,7 +34,7 @@ public final class Constants {
 		/**
 		 * Arm CAN ID
 		 */
-		public static final int ARM = 5;
+		public static final int ARM = 8;
 		/**
 		 * Physical Knowns
 		 */
@@ -71,7 +71,7 @@ public final class Constants {
 	}
 
 	public static final class INTAKE {
-		public static final int INTAKE = 6;
+		public static final int INTAKE = 11;
 		public static final double INTAKE_POWER = 0.5;
 		public static final double EXTAKE_POWER = -0.5;
 	}

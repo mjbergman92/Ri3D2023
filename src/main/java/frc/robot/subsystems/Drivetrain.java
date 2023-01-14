@@ -20,6 +20,11 @@ public class Drivetrain extends BaseSubsystem<DrivetrainState> {
 
 	public Drivetrain() {
 		super(DrivetrainState.NEUTRAL);
+		left.restoreFactoryDefaults();
+		left_slave.restoreFactoryDefaults();
+		right.restoreFactoryDefaults();
+		right_slave.restoreFactoryDefaults();
+		left.setInverted(true);
 		left_slave.follow(left);
 		right_slave.follow(right);
 	}
