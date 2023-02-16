@@ -35,16 +35,16 @@ public class PositionArm extends BaseSequence<PositionArmPhase> {
 
     @Override
     public void process() {
-        if (Math.abs(Axes.Arm_Up_Down.getAxis()) > 0) {
+        if (Math.abs(Axes.Arm_Up.getAxis()) > 0 || Math.abs(Axes.Arm_Down.getAxis()) > 0) {
             setNextPhase(PositionArmPhase.MOVE_MANUALLY);
         } else if (Buttons.Floor.getButton()) {
-            setNextPhase(PositionArmPhase.FLOOR);
+            // setNextPhase(PositionArmPhase.FLOOR);
         } else if (Buttons.Mid_Cube.getButton()) {
-            setNextPhase(PositionArmPhase.MID_CUBE);
+            // setNextPhase(PositionArmPhase.MID_CUBE);
         } else if (Buttons.Mid_Cone.getButton()) {
-            setNextPhase(PositionArmPhase.MID_CONE);
+            // setNextPhase(PositionArmPhase.MID_CONE);
         } else if (Buttons.Station.getButton()) {
-            setNextPhase(PositionArmPhase.SUBSTATTION);
+            // setNextPhase(PositionArmPhase.SUBSTATTION);
         }
         updatePhase();
     }

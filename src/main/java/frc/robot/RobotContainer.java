@@ -76,8 +76,9 @@ public class RobotContainer {
 
 	public enum Axes {
 		Drive_ForwardBackward(() -> -modifyAxis(getController1().getLeftY())),
-		Drive_LeftRight(() -> modifyAxis(getController1().getLeftX())),
-		Arm_Up_Down(() -> -modifyAxis(getController1().getRightY()));
+		Drive_LeftRight(() -> modifyAxis(getController1().getRightX())),
+		Arm_Down(() -> -modifyAxis(getController1().getLeftTriggerAxis())),
+		Arm_Up(() -> modifyAxis(getController1().getRightTriggerAxis()));
 
 		Callable<Double> callable;
 

@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -17,6 +18,8 @@ public class Drivetrain extends BaseSubsystem<DrivetrainState> {
 	CANSparkMax right = new CANSparkMax(DRIVE.RIGHT_MASTER, MotorType.kBrushless);
 	CANSparkMax right_slave = new CANSparkMax(DRIVE.RIGHT_SLAVE, MotorType.kBrushless);
 	DifferentialDrive drive = new DifferentialDrive(left, right);
+	SlewRateLimiter xLimiter = new SlewRateLimiter(2.0);
+	SlewRateLimiter rotLimiter = new SlewRateLimiter(2.0);
 
 	public Drivetrain() {
 		super(DrivetrainState.NEUTRAL);
@@ -30,11 +33,11 @@ public class Drivetrain extends BaseSubsystem<DrivetrainState> {
 	}
 
 	protected void drive() {
-		drive.arcadeDrive(Axes.Drive_ForwardBackward.getAxis(), Axes.Drive_LeftRight.getAxis());
+		drive.arcadeDrive(xLimiter.calculate(Axes.Drive_ForwardBackward.getAxis()), rotLimiter.calculate(Axes.Drive_LeftRight.getAxis()));
 	}
 
 	protected void creep() {
-		drive.arcadeDrive(Axes.Drive_ForwardBackward.getAxis() * DRIVE.CREEP_RATIO, Axes.Drive_LeftRight.getAxis() * DRIVE.CREEP_ROTATE_RATIO);
+		drive.arcadeDrive(xLimiter.calculate(Axes.Drive_ForwardBackward.getAxis() * DRIVE.CREEP_RATIO), rotLimiter.calculate(Axes.Drive_LeftRight.getAxis() * DRIVE.CREEP_ROTATE_RATIO));
 	}
 
 	@Override

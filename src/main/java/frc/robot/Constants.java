@@ -38,14 +38,15 @@ public final class Constants {
 		/**
 		 * Physical Knowns
 		 */
-		public static final double GEAR_RATIO = 1;// TODO gear ratio
-		public static final double kG = 1.82; // TODO sysid
-		public static final double kV = 0.03;
-		public static final double kA = 0.0025;
+		public static final double GEAR_RATIO = 1 / 200;
+		public static final double kS = 0.278;
+		public static final double kG = 0.521;
+		public static final double kV = 0.062;
+		public static final double kA = 0.0047;
 		/**
 		 * Tunable PID
 		 */
-		public static final double kP = 0.0027918; // TODO tune after using sysid
+		public static final double kP = 0.069;
 		public static final double kD = 0.0;
 		/**
 		 * Desired Parameters
@@ -60,7 +61,7 @@ public final class Constants {
 		/**
 		 * Arm Position Angles
 		 */
-		public static final int LOWEST_ARM_POS = -70;
+		public static final int LOWEST_ARM_POS = -85;
 		public static final int HIGHEST_ARM_POS = 70; // TODO find comfortable max
 		public static final int LOW_TARGET_POS = -70; // TODO low target position to grab off floor
 		public static final int MIDDLE_TARGET_POS_CUBE = -40; // TODO middle target position

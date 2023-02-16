@@ -21,10 +21,10 @@ public class SequenceProcessor {
 
 	public void process() {
 		drive.start(Robot.drivetrain);
-		// positionArm.start();
+		positionArm.start();
 		intake.start();
 		drive.process();
-		// positionArm.process();
+		positionArm.process();
 		intake.process();
 	}
 }

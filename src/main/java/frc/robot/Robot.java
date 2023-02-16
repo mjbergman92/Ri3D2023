@@ -32,7 +32,7 @@ import java.util.Arrays;
  */
 public class Robot extends TimedRobot {
 	public static Drivetrain drivetrain;
-	// public static Arm arm;
+	public static Arm arm;
 	public static Intake intake;
 	public static SequenceProcessor sequenceProcessor;
 	public static RobotContainer robotContainer;
@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		robotContainer = new RobotContainer();
 		drivetrain = new Drivetrain();
-		// arm = new Arm();
+		arm = new Arm();
 		intake = new Intake();
 		sequenceProcessor = new SequenceProcessor();
 		// Arrays.asList(Path.values()).stream().forEach(path -> path.loadPath());
@@ -70,7 +70,7 @@ public class Robot extends TimedRobot {
 	public void disabledInit() {
 		drivetrain.forceRelease();
 		prevLoopTime = 0;
-		// arm.forceRelease();
+		arm.forceRelease();
 		intake.forceRelease();
 	}
 
@@ -111,7 +111,7 @@ public class Robot extends TimedRobot {
 			// run processes
 			/** Run subsystem process methods here */
 			drivetrain.process();
-			// arm.process();
+			arm.process();
 			intake.process();
 		}
 		Timer.delay(0.001);
@@ -120,7 +120,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		drivetrain.forceRelease();
-		// arm.forceRelease();
+		arm.forceRelease();
 		intake.forceRelease();
 		prevLoopTime = 0;
 	}
@@ -138,7 +138,7 @@ public class Robot extends TimedRobot {
 			// run processes
 			/** Run subsystem process methods here */
 			drivetrain.process();
-			// arm.process();
+			arm.process();
 			intake.process();
 		}
 		Timer.delay(0.001);
@@ -155,6 +155,7 @@ public class Robot extends TimedRobot {
 	public void log() {
 		logCounter++;
 		if (logCounter > 5) {
+			SmartDashboard.putNumber("Arm Position", arm.getArmPosition());
 			logCounter = 0;
 		}
 	}

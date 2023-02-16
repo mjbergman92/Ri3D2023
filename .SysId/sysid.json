@@ -2,7 +2,9 @@
   "SysId": {
     "Analysis Type": "General Mechanism",
     "NetworkTables Settings": {
-      "serverTeam": "1911"
-    }
+      "serverTeam": "10.19.19.2"
+    },
+    "mode": "Client (NT4)",
+    "serverTeam": "1919"
   }
 }
