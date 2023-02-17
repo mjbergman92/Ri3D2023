@@ -23,7 +23,7 @@ public enum ArmState implements ISubsystemState<Arm> {
         s.setTargetArmPosition(ARM.STATION_PICKUP_POS);
     }),
     MOVE_MANUALLY((s) -> {
-        s.changeTargetArmPosition(Axes.Arm_Up_Down.getAxis());
+        s.changeTargetArmPosition(Axes.Arm_Up.getAxis());
     });
 
     SubsystemState<Arm> state;

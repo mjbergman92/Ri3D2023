@@ -73,7 +73,7 @@ public final class Constants {
 
 	public static final class INTAKE {
 		public static final int INTAKE = 11;
-		public static final double INTAKE_POWER = 0.5;
+		public static final double INTAKE_POWER = 1.0;
 		public static final double EXTAKE_POWER = -0.5;
 	}
 

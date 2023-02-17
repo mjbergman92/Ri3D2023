@@ -51,13 +51,13 @@ public class RobotContainer {
 	}
 
 	public enum Buttons {
-		Creep(() -> getController1().getRightBumper()),
-		Floor(() -> getController1().getAButton()),
-		Mid_Cube(() -> getController1().getBButton()),
-		Mid_Cone(() -> getController1().getXButton()),
-		Station(() -> getController1().getYButton()),
-		Intake(() -> getController1().getRightTriggerAxis() > 0.15),
-		Extake(() -> getController1().getLeftTriggerAxis() > 0.15);
+		Creep(() -> getController1().getAButton()),
+	    // Floor(() -> getController1().getAButton()),
+	    // Mid_Cube(() -> getController1().getBButton()),
+	    // Mid_Cone(() -> getController1().getXButton()),
+	    // Station(() -> getController1().getYButton()),
+		Intake(() -> getController1().getRightBumper()),
+		Extake(() -> getController1().getLeftBumper());
 
 		Callable<Boolean> callable;
 
